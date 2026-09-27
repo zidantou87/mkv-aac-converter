@@ -1,0 +1,11 @@
+# converter output
+aac/
+
+# local tooling
+ffmpeg.exe
+ffprobe.exe
+bin/
+
+# OS noise
+Thumbs.db
+.DS_Store

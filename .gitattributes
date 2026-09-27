@@ -1,0 +1,18 @@
+# Normalise line endings in the repository, then check files out with the
+# endings each platform actually needs.
+* text=auto
+
+# CRLF is not optional for cmd.exe: LF-only batch files get parsed line
+# fragments as commands.
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# PowerShell is happy with either, but CRLF keeps Windows users comfortable.
+*.ps1 text eol=crlf
+
+# bash scripts must stay LF, otherwise they fail with
+# "bash: ./convert-aac.sh: /bin/bash^M: bad interpreter".
+*.sh text eol=lf
+
+*.md   text eol=lf
+LICENSE text eol=lf
