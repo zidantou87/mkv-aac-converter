@@ -58,9 +58,17 @@ is, and a parse error is reported instead of silently closing the window.
 ## 4. LF line endings in a .cmd
 
 **Symptom:** fragments of lines get executed:
-`'PEG' is not recognized as an internal or external command`.
+`'PEG' is not recognized as an internal or external command`. Labels and
+parenthesised blocks are the first things to fall apart.
 
-**Fix:** CRLF. `cmd.exe` is not a POSIX shell.
+**How it sneaks in even when you committed CRLF:** with `*.cmd text eol=crlf` in
+`.gitattributes`, Git stores the blob with LF and converts on checkout. So
+`git clone` gives Windows users CRLF as intended — but GitHub's **Download ZIP**
+hands out the stored blob, i.e. LF.
+
+**Fix:** commit CRLF, and keep the launcher free of `goto` labels and `if(...)`
+blocks so that it also survives an LF copy. `convert-aac.cmd` is written that
+way and is tested with both endings.
 
 ## 5. "The file exists" is not "the download finished"
 
